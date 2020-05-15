@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
 
-# build ver1.1
+# build ver1.2
 
 from tkinter import *
 from tkinter import ttk
@@ -91,11 +91,11 @@ if is_admin():
 
                 win32api.keybd_event(67, win32api.MapVirtualKey(67, 0), 0, 0) # simulate type C
                 win32api.keybd_event(67, win32api.MapVirtualKey(67, 0), win32con.KEYEVENTF_KEYUP, 0)
-                time.sleep(0.65)
+                time.sleep(0.7)
 
                 win32api.keybd_event(68, win32api.MapVirtualKey(68, 0), 0, 0) # simulate type D
                 win32api.keybd_event(68, win32api.MapVirtualKey(68, 0), win32con.KEYEVENTF_KEYUP, 0)
-                time.sleep(0.4)
+                time.sleep(0.5)
 
                 now += 1
 
