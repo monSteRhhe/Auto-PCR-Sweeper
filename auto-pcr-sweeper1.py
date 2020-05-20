@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
 
-# build ver1.3
+# build ver1.4
 
+import ctypes, sys
 from tkinter import *
 from tkinter import ttk
-import win32api, win32gui, win32con
-import time
 import pywintypes
-import ctypes, sys
+import win32api, win32gui, win32con
+import time, threading
 
 # get admin
 def is_admin():
@@ -87,24 +87,30 @@ if is_admin():
 
                 win32api.keybd_event(66, win32api.MapVirtualKey(66, 0), 0, 0) # simulate type B
                 win32api.keybd_event(66, win32api.MapVirtualKey(66, 0), win32con.KEYEVENTF_KEYUP, 0)
-                time.sleep(3.3)
+                time.sleep(3.2)
 
                 win32api.keybd_event(67, win32api.MapVirtualKey(67, 0), 0, 0) # simulate type C
                 win32api.keybd_event(67, win32api.MapVirtualKey(67, 0), win32con.KEYEVENTF_KEYUP, 0)
-                time.sleep(0.75)
+                time.sleep(0.8)
 
                 win32api.keybd_event(68, win32api.MapVirtualKey(68, 0), 0, 0) # simulate type D
                 win32api.keybd_event(68, win32api.MapVirtualKey(68, 0), win32con.KEYEVENTF_KEYUP, 0)
-                time.sleep(0.55)
+                time.sleep(0.6)
 
                 now += 1
 
             mestr.set('本次扫荡完毕。')
 
-    def touchmain(self):
-        main()
+    # multi-threading
+    def thread(func):
+        th = threading.Thread(target = func)
+        th.setDaemon(True)
+        th.start()
 
-    btn = Button(frame1, text = '开始', width = 10, command = main)
+    def touchmain(self):
+        thread(main)
+
+    btn = Button(frame1, text = '开始', width = 10, command = lambda: thread(main))
     btn.grid(row = 0, column = 2, padx=15, pady =5)
 
     root.bind('<Return>', touchmain)
